@@ -37,7 +37,9 @@ def doIt(url):
     if req == None:
         return
     paserData(req)
-
+'''
+用于爬取大乐透每期的号
+'''
 
 if __name__ == '__main__':
     #url = baseUrl +'07002.shtml'
