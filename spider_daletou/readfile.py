@@ -20,13 +20,25 @@ def textRead(filename):
 	return content
 
 def  processData(datalist):
-
+	tmplist = []
+	tmplist2 = []
 	for dataline in datalist:
 		data = dataline.strip().split(' ')
-		print(data)
-		#tmplist.append(data)
+		frontlist = data[:5]
+		backlist = data[-2:]
+		#print(data , '====',prelist ,'---', houlist)
+		for i in frontlist:		
+			tmplist.append(i)
+		for i in backlist:
+			tmplist2.append(i)
+	print(tmplist , '-----',tmplist2)
+
+	print(tmplist.count('02'))
+	print(tmplist2.count('02'))
+
+
+
 	
 if __name__== '__main__':
 	test= textRead('daletou1.txt')
-	
 	processData(test)
