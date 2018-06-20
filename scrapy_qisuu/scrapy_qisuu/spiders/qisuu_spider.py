@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy_qisuu.items import ScrapyQisuuItem
 
 
 class QisuuSpiderSpider(scrapy.Spider):
@@ -10,8 +11,8 @@ class QisuuSpiderSpider(scrapy.Spider):
 
     def parse(self, response):
         qisuu=response.css('div.nav')
+        books = ScrapyQisuuItem()
         for i in qisuu:
-             # =i.css('a::text').extract()?\
             #table =i.css('a::attr(href)').extract()
             urls =i.css('a::attr(href)').extract()
         #书的下载页
@@ -23,9 +24,12 @@ class QisuuSpiderSpider(scrapy.Spider):
                     #print(url)
                     yield scrapy.Request(book_url, callback=self.parse)
         for book in response.css('div.detail_info'):
-            name = book.css('h1::text').extract()[0]
-            author = book.css('li::text').extract()[5]
-            print('书名: %s 作者: %s'%(name ,author))
+            books['name'] = book.css('h1::text').extract()[0]
+            books['author'] = book.css('li::text').extract()[5]
+            # print('书名: %s 作者: %s'%(name ,author))
 
         book_list = response.css('div.showDown script').extract()
-        print(book_list)
+        if book_list:
+            books['url'] = book_list[0].split(',')[1][1:-1:]
+        self.log('url %s' % books)
+        yield books
