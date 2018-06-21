@@ -6,6 +6,19 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.utils.project import get_project_settings
+import random
+
+settings = get_project_settings()
+class MyUserAgentMiddleware(object):
+    def __init__(self):
+        pass
+    def process_request(self, request, spider):
+        # spider.logger.info(msg='now entring download midware')
+        agent = random.choice(settings.get('MY_USER_AGENT_LIST'))
+        if agent:
+            request.headers.setdefault(b'User-Agent',agent)
+        # spider.logger.info(u'User-Agent is : {} {}'.format(request.headers.get('User-Agent'), request))
 
 
 class ScrapyQisuuSpiderMiddleware(object):
