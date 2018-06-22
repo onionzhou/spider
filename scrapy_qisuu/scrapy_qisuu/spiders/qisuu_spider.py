@@ -10,6 +10,7 @@ class QisuuSpiderSpider(scrapy.Spider):
     start_urls = ['https://www.qisuu.la/soft/sort010/']
 
     def parse(self, response):
+        print('---- %s' %response.url)
         # qisuu=response.css('div.nav')
         end_page = response.css('div.tspage').css('a::attr(href)').extract()[-1]
         all_page = end_page.split('_')[1].split('.')[0]
