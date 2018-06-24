@@ -7,16 +7,19 @@ class QisuuSpiderSpider(scrapy.Spider):
     name = 'qisuu_spider'
     allowed_domains = ['qisuu.la']
     main_url = ['http://www.qisuu.la']
-    start_urls = ['https://www.qisuu.la/soft/sort010/']
+    start_urls = ['https://www.qisuu.la/soft/sort09/',
+                  'https://www.qisuu.la/soft/sort010/']
 
     def parse(self, response):
-        print('---- %s' %response.url)
+        # print('---- %s' %response.url)
         # qisuu=response.css('div.nav')
         end_page = response.css('div.tspage').css('a::attr(href)').extract()[-1]
         all_page = end_page.split('_')[1].split('.')[0]
+        prepara_url = end_page.split('_')[0] + '_'
         for page in range(1,int(all_page)+1):
             # https: // www.qisuu.la / soft / sort06 / index_2.html
-            url = self.main_url[0] +'/soft/sort010/index_' + str(page)+ '.html'
+            # url = self.main_url[0] +'/soft/sort010/index_' + str(page)+ '.html'
+            url = self.main_url[0] +prepara_url + str(page)+ '.html'
             request = scrapy.Request(url, callback=self.parse_next)
             yield request
     def parse_next(self,response):
