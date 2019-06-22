@@ -131,7 +131,7 @@ def test():
         data =get_weather_data(areaFriend[key])
         l.append(data)
 
-    sfriend = "---\n".join(str(i) for i in l ) +"---\n" +'要注意天气变化O-O,小仙女们'
+    sfriend = "---\n".join(str(i) for i in l ) +"---\n" +'要注意天气变化O-O'
     finalsend= localtime +"\n" + sfriend
     #print(finalsend)
     sendMessageToFriend(finalsend)
