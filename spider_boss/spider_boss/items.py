@@ -11,8 +11,8 @@ import scrapy
 class SpiderBossItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    # job_title =scrapy.Field()
-    pass
-
-
-
+    job_title = scrapy.Field()
+    company = scrapy.Field()
+    money = scrapy.Field()
+    job_context = scrapy.Field()
+    detail_url=scrapy.Field()

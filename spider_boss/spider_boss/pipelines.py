@@ -6,18 +6,31 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from  pymongo import MongoClient
-client = MongoClient("mongodb://onion:onion@192.168.1.20:27017/boss")
+from spider_boss.items import SpiderBossItem
+
+#
+# client = MongoClient("mongodb://onion:onion@192.168.1.20:27017/boss")
+client = MongoClient("mongodb://127.0.0.1:27017/boss")
+
 collection = client["boss"]["python"]
 
 
 class SpiderBossPipeline(object):
     def process_item(self, item, spider):
-        collection.insert(item)
-        print(item)
+        item["job_context"] = self.process_context(item["job_context"])
+        # collection.insert(item)
+        if isinstance(item, SpiderBossItem):
+            collection.insert(dict(item))
+        # print(item)
         return item
+
+    def process_context(self, context):
+        #处理 "\n" 和空字符串
+        context = [i.strip() for i in context if i.strip() !=""]
+        return context
+
 
 class SpiderBossPipeline1(object):
     def process_item(self, item, spider):
-        print("301")
-
+        # print("301")
         return item
