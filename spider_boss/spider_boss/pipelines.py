@@ -47,6 +47,14 @@ class SpiderBossPipeline(object):
 
 class SpiderBossPipeline1(object):
 
+    def open_spider(self, spider):
+        self.client = MongoClient("mongodb://127.0.0.1:27017/boss")
+
+    def close_spider(self, spider):
+        print("close ...")
+        print(spider.name)
+        self.client.close()
+
     def process_item(self, item, spider):
         if spider.name =="zhipin_test":
             self.collection = self.client["boss"]["test"]

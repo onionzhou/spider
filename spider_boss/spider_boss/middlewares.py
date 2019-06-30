@@ -19,10 +19,16 @@ class MyUserAgentMiddleware(object):
         agent = random.choice(settings.get('MY_USER_AGENT_LIST'))
         if agent:
             request.headers.setdefault(b'User-Agent',agent)
-        # spider.logger.info(u'User-Agent is : {} {}'.format(request.headers.get('User-Agent'), request))
+        spider.logger.info(u'User-Agent is : {} {}'.format(request.headers.get('User-Agent'), request))
 
 
+class IPProxyDownloadMiddleware(object):
 
+    def process_request(self, request, spider):
+        ip_proxy = random.choice(settings.get('IP_PROXY_LIST'))
+        print('*'*20)
+        print(ip_proxy)
+        request.meta["proxy"]=ip_proxy
 
 class SpiderBossSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,

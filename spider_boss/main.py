@@ -7,5 +7,5 @@
 # @Software: PyCharm
 
 from scrapy import cmdline
-cmdline.execute("scrapy crawl zhipin".split())
-# cmdline.execute('scrapy crawl zhipin_test'.split())
+# cmdline.execute("scrapy crawl zhipin".split())
+cmdline.execute('scrapy crawl zhipin_test'.split())
