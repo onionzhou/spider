@@ -75,7 +75,7 @@ DOWNLOAD_DELAY = 1
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'spider_boss.middlewares.MyUserAgentMiddleware': 543,
-   'spider_boss.middlewares.IPProxyDownloadMiddleware': 542,
+   # 'spider_boss.middlewares.IPProxyDownloadMiddleware': 542,
 }
 
 # Enable or disable extensions

@@ -44,15 +44,14 @@ class SpiderBossPipeline(object):
         context = [i.strip() for i in context if i.strip() != ""]
         return context
 
-
+#存储测试相关的职位
 class SpiderBossPipeline1(object):
 
     def open_spider(self, spider):
         self.client = MongoClient("mongodb://127.0.0.1:27017/boss")
 
     def close_spider(self, spider):
-        print("close ...")
-        print(spider.name)
+
         self.client.close()
 
     def process_item(self, item, spider):
