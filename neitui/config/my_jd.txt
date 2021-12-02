@@ -1,0 +1,13 @@
+python
+shell
+linux
+test reports
+测试计划
+cet 4
+英语四级
+自动化
+性能测试
+网络
+tcp/ip
+nginx
+微服务
